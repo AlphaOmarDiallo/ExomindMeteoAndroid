@@ -8,8 +8,7 @@
     <fragment
         android:id="@+id/startFragment"
         android:name="com.alphaomardiallo.exomindmeteoandroid.ui.startingFragment.StartFragment"
-        android:label="fragment_start"
-        tools:layout="@layout/fragment_start" >
+        android:label="fragment_start">
         <action
             android:id="@+id/action_startFragment_to_resultFragment"
             app:destination="@id/resultFragment" />

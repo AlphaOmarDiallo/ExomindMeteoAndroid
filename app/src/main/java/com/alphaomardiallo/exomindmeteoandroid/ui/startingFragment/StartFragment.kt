@@ -43,7 +43,9 @@ class StartFragment : Fragment() {
         Surface {
             Box(contentAlignment = Alignment.Center) {
                 Column(
-                    modifier = Modifier.fillMaxWidth().fillMaxHeight(),
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .fillMaxHeight(),
                     verticalArrangement = Arrangement.Center,
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
@@ -58,7 +60,7 @@ class StartFragment : Fragment() {
     fun TextOverButton() {
         Text(
             text = stringResource(id = R.string.text_over_main_button),
-            style = MaterialTheme.typography.h6,
+            style = MaterialTheme.typography.body1,
             fontWeight = FontWeight.Bold,
             textAlign = TextAlign.Center
         )

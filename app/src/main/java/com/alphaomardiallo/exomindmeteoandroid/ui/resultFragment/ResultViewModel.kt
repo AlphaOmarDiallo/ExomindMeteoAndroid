@@ -1,8 +1,7 @@
 package com.alphaomardiallo.exomindmeteoandroid.ui.resultFragment
 
-import android.content.ContentValues
+import android.content.ContentValues.TAG
 import android.util.Log
-import android.view.View
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -36,7 +35,7 @@ class ResultViewModel @Inject constructor(
         MutableLiveData()
     val currentWeatherList: LiveData<MutableList<ResponseCurrentWeather>> get() = _currentWeatherList
 
-    fun getCurrentWeather(city: City) {
+    private fun getCurrentWeather(city: City) {
         viewModelScope.launch {
             try {
                 val response = currentWeatherRepository.getCurrentWeather(
@@ -47,24 +46,24 @@ class ResultViewModel @Inject constructor(
                 )
 
                 if (!response.isSuccessful) {
-                    Log.e(ContentValues.TAG, "getCurrentWeather: api call unsuccessful", null)
+                    Log.e(TAG, "getCurrentWeather: api call unsuccessful", null)
                     return@launch
                 }
 
                 if (response.body() != null) updateCurrentWeather(response.body()!!) else Log.e(
-                    ContentValues.TAG,
+                    TAG,
                     "getCurrentWeather: data is null",
                     null
                 )
             } catch (exception: IOException) {
                 Log.e(
-                    ContentValues.TAG,
+                    TAG,
                     "getCurrentWeather: IOException = ${exception.message}",
                     null
                 )
             } catch (exception: HttpException) {
                 Log.e(
-                    ContentValues.TAG,
+                    TAG,
                     "getCurrentWeather: HttpException = ${exception.message}",
                     null
                 )
@@ -73,24 +72,24 @@ class ResultViewModel @Inject constructor(
     }
 
     private fun updateCurrentWeather(responseCurrentWeather: ResponseCurrentWeather) {
-        _currentWeatherList.value!!.add(responseCurrentWeather)
+        Log.i(TAG, "updateCurrentWeather: ${responseCurrentWeather.weather}")
     }
 
     /**
      * button click
      */
 
-    suspend fun getCurrentWeatherDataForEachCity(){
-       viewModelScope.launch {
-           getCurrentWeather(cities[0])
-           delay(10000)
-           getCurrentWeather(cities[1])
-           delay(10000)
-           getCurrentWeather(cities[2])
-           delay(10000)
-           getCurrentWeather(cities[3])
-           delay(10000)
-           getCurrentWeather(cities[4])
-       }
+    fun getCurrentWeatherDataForEachCity() {
+        viewModelScope.launch {
+            getCurrentWeather(cities[0])
+            delay(10000)
+            getCurrentWeather(cities[1])
+            delay(10000)
+            getCurrentWeather(cities[2])
+            delay(10000)
+            getCurrentWeather(cities[3])
+            delay(10000)
+            getCurrentWeather(cities[4])
+        }
     }
 }

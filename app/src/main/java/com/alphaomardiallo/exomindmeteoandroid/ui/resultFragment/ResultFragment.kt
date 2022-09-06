@@ -1,60 +1,62 @@
 package com.alphaomardiallo.exomindmeteoandroid.ui.resultFragment
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.alphaomardiallo.exomindmeteoandroid.R
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
+import com.alphaomardiallo.exomindmeteoandroid.databinding.FragmentResultBinding
+import dagger.hilt.android.AndroidEntryPoint
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [ResultFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
+@AndroidEntryPoint
 class ResultFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
+    private lateinit var binding: FragmentResultBinding
+    private lateinit var viewModel: ResultViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_result, container, false)
+        binding = FragmentResultBinding.inflate(inflater, container, false)
+        viewModel = ViewModelProvider(requireActivity())[ResultViewModel::class.java]
+
+        return binding.root
+
     }
 
-    companion object {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment ResultFragment.
+         * testing that API call with delay works correctly before implementation
          */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            ResultFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
+        getCurrentWeatherData()
+        //setTextView()
     }
+
+    private fun getCurrentWeatherData() = viewModel.getCurrentWeatherDataForEachCity()
+
+/*    private fun setTextView() {
+        */
+    /**
+     * Used handler by lack of time, never encountered that case before
+     *//*
+        val handler = Handler()
+
+        while (true) {
+            handler.postDelayed({
+                binding.textView2.setText(R.string.waiting_message_1)
+            }, 6000)
+            handler.postDelayed({
+                binding.textView2.setText(R.string.waiting_message_1)
+            }, 6000)
+            handler.postDelayed({
+                binding.textView2.setText(R.string.waiting_message_1)
+            }, 6000)
+        }
+
+    }*/
+
 }
