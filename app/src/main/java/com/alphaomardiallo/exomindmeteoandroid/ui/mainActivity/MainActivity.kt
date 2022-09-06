@@ -1,4 +1,4 @@
-package com.alphaomardiallo.exomindmeteoandroid.mainActivity
+package com.alphaomardiallo.exomindmeteoandroid.ui.mainActivity
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity

@@ -1,4 +1,4 @@
-package com.alphaomardiallo.exomindmeteoandroid.resultFragment
+package com.alphaomardiallo.exomindmeteoandroid.ui.resultFragment
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

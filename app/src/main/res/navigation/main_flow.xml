@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/startFragment"
-        android:name="com.alphaomardiallo.exomindmeteoandroid.startingFragment.StartFragment"
+        android:name="com.alphaomardiallo.exomindmeteoandroid.ui.startingFragment.StartFragment"
         android:label="fragment_start"
         tools:layout="@layout/fragment_start" >
         <action
@@ -16,7 +16,7 @@
     </fragment>
     <fragment
         android:id="@+id/resultFragment"
-        android:name="com.alphaomardiallo.exomindmeteoandroid.resultFragment.ResultFragment"
+        android:name="com.alphaomardiallo.exomindmeteoandroid.ui.resultFragment.ResultFragment"
         android:label="fragment_result"
         tools:layout="@layout/fragment_result" />
 </navigation>

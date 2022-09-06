@@ -17,7 +17,7 @@
         android:theme="@style/Theme.ExomindMeteoAndroid"
         tools:targetApi="31">
         <activity
-            android:name=".mainActivity.MainActivity"
+            android:name="com.alphaomardiallo.exomindmeteoandroid.ui.mainActivity.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
