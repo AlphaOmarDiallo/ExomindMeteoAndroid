@@ -2,7 +2,6 @@ package com.alphaomardiallo.exomindmeteoandroid.mainActivity
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.alphaomardiallo.exomindmeteoandroid.R
 import com.alphaomardiallo.exomindmeteoandroid.databinding.ActivityMainBinding
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.*
