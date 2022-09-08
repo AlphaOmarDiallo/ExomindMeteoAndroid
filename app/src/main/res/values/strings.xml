@@ -9,4 +9,5 @@
     <string name="waiting_message_2">C’est presque fini…</string>
     <string name="waiting_message_3">Plus que quelques secondes avant d’avoir le résultat…</string>
     <string name="recommencer">Recommencer</string>
+    <string name="current_weather_icon">Current weather Icon</string>
 </resources>
