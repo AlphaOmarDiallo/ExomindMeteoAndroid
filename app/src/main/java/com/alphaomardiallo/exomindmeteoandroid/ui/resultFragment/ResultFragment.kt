@@ -22,7 +22,6 @@ class ResultFragment : Fragment() {
         // Inflate the layout for this fragment
         binding = FragmentResultBinding.inflate(inflater, container, false)
         viewModel = ViewModelProvider(requireActivity())[ResultViewModel::class.java]
-
         return binding.root
 
     }
@@ -33,30 +32,25 @@ class ResultFragment : Fragment() {
          * testing that API call with delay works correctly before implementation
          */
         getCurrentWeatherData()
-        //setTextView()
+        observeData()
     }
 
+    /**
+     * Get current weather
+     */
     private fun getCurrentWeatherData() = viewModel.getCurrentWeatherDataForEachCity()
 
-/*    private fun setTextView() {
-        */
-    /**
-     * Used handler by lack of time, never encountered that case before
-     *//*
-        val handler = Handler()
-
-        while (true) {
-            handler.postDelayed({
-                binding.textView2.setText(R.string.waiting_message_1)
-            }, 6000)
-            handler.postDelayed({
-                binding.textView2.setText(R.string.waiting_message_1)
-            }, 6000)
-            handler.postDelayed({
-                binding.textView2.setText(R.string.waiting_message_1)
-            }, 6000)
+    private fun observeData() {
+        viewModel.apiCurrentProgress.observe(requireActivity()) {
+            incrementProgress(it)
         }
+    }
 
-    }*/
-
+    /**
+     * Progress bar setup
+     */
+    private fun incrementProgress(progress: Int){
+        binding.progressBar.progress = progress
+        if (progress == 100) binding.progressBar.visibility = View.INVISIBLE
+    }
 }

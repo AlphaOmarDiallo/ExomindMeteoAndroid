@@ -68,6 +68,8 @@ class ResultViewModel @Inject constructor(
                     null
                 )
             }
+
+            incrementCurrentProgress()
         }
     }
 
@@ -79,17 +81,42 @@ class ResultViewModel @Inject constructor(
      * button click
      */
 
+    private var currentProgress = 0
+    private val _apiCurrentProgress: MutableLiveData<Int> = MutableLiveData()
+    val apiCurrentProgress: LiveData<Int> get() = _apiCurrentProgress
+
     fun getCurrentWeatherDataForEachCity() {
         viewModelScope.launch {
-            getCurrentWeather(cities[0])
-            delay(10000)
-            getCurrentWeather(cities[1])
-            delay(10000)
-            getCurrentWeather(cities[2])
-            delay(10000)
-            getCurrentWeather(cities[3])
-            delay(10000)
-            getCurrentWeather(cities[4])
+            runTimerMessage()
+            for (city in cities) {
+                getCurrentWeather(city)
+                delay(10000)
+            }
+        }
+    }
+
+    private fun incrementCurrentProgress(){
+        currentProgress += 20
+        _apiCurrentProgress.value = currentProgress
+        Log.i(TAG, "incrementCurrentProgress: ${apiCurrentProgress.value}")
+    }
+
+    /**
+     * Text View handler
+     */
+
+    private val _messageToDisplay: MutableLiveData<Int> = MutableLiveData()
+    val messageToDisplay: LiveData<Int> get() = _messageToDisplay
+    
+    private fun runTimerMessage() {
+        val listMessageToDisplay = listOf(1,2,0,1,2,0,1,2,0)
+        viewModelScope.launch {
+            _messageToDisplay.value = 0
+            for (index in listMessageToDisplay) {
+                delay(6000)
+                _messageToDisplay.value = index
+                Log.i(TAG, "runTimerMessage: ${messageToDisplay.value}")
+            }
         }
     }
 }
