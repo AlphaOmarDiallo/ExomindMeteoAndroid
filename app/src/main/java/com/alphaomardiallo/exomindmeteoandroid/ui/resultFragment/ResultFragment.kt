@@ -76,7 +76,7 @@ class ResultFragment : Fragment() {
      */
     private fun incrementProgress(progress: Int) {
         if (isAdded) {
-            binding.progressBar.progress = progress
+            binding.progressBarAPILoad.progress = progress
             if (progress == 100) {
                 hideProgressBar()
                 hideTextView()
@@ -88,12 +88,12 @@ class ResultFragment : Fragment() {
     }
 
     private fun hideProgressBar() {
-        binding.progressBar.visibility = View.INVISIBLE
+        binding.progressBarAPILoad.visibility = View.INVISIBLE
     }
 
     private fun showProgressBarAndSetToZero() {
-        binding.progressBar.visibility = View.VISIBLE
-        binding.progressBar.progress = 0
+        binding.progressBarAPILoad.visibility = View.VISIBLE
+        binding.progressBarAPILoad.progress = 0
     }
 
     /**
@@ -101,18 +101,18 @@ class ResultFragment : Fragment() {
      */
     private fun textToDisplay(index: Int) {
         when (index) {
-            1 -> binding.textView2.setText(R.string.waiting_message_2)
-            2 -> binding.textView2.setText(R.string.waiting_message_3)
-            else -> binding.textView2.setText(R.string.waiting_message_1)
+            1 -> binding.tvWaitingMessage.setText(R.string.waiting_message_2)
+            2 -> binding.tvWaitingMessage.setText(R.string.waiting_message_3)
+            else -> binding.tvWaitingMessage.setText(R.string.waiting_message_1)
         }
     }
 
     private fun hideTextView() {
-        binding.textView2.visibility = View.INVISIBLE
+        binding.tvWaitingMessage.visibility = View.INVISIBLE
     }
 
     private fun showTextView() {
-        binding.textView2.visibility = View.VISIBLE
+        binding.tvWaitingMessage.visibility = View.VISIBLE
     }
 
     /**
@@ -120,15 +120,15 @@ class ResultFragment : Fragment() {
      */
 
     private fun buttonRestartVisible() {
-        binding.button.visibility = View.VISIBLE
+        binding.btnRestart.visibility = View.VISIBLE
     }
 
     private fun buttonRestartInvisible() {
-        binding.button.visibility = View.GONE
+        binding.btnRestart.visibility = View.GONE
     }
 
     private fun restartOnClickSetup() {
-        binding.button.setOnClickListener {
+        binding.btnRestart.setOnClickListener {
             restartAPICall()
         }
     }

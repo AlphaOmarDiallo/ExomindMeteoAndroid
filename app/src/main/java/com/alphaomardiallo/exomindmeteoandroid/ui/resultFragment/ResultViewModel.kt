@@ -94,7 +94,7 @@ class ResultViewModel @Inject constructor(
             runTimerMessage()
             for (city in cities) {
                 getCurrentWeather(city)
-                delay(1000)
+                delay(20000)
             }
         }
     }
