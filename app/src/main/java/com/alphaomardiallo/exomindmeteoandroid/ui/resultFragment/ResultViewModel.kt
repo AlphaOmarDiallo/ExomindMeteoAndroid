@@ -20,7 +20,7 @@ import javax.inject.Inject
 @HiltViewModel
 class ResultViewModel @Inject constructor(
     private val currentWeatherRepository: CurrentWeatherRepository,
-    private val cityRepository: CityRepository
+    cityRepository: CityRepository
 ) : ViewModel() {
 
     /**
@@ -32,7 +32,7 @@ class ResultViewModel @Inject constructor(
      * current weather
      */
     private val _currentWeatherList: MutableLiveData<MutableList<ResponseCurrentWeather>> =
-        MutableLiveData()
+        MutableLiveData(mutableListOf())
     val currentWeatherList: LiveData<MutableList<ResponseCurrentWeather>> get() = _currentWeatherList
 
     private fun getCurrentWeather(city: City) {
@@ -74,7 +74,8 @@ class ResultViewModel @Inject constructor(
     }
 
     private fun updateCurrentWeather(responseCurrentWeather: ResponseCurrentWeather) {
-        Log.i(TAG, "updateCurrentWeather: ${responseCurrentWeather.weather}")
+        _currentWeatherList.value?.add(responseCurrentWeather)
+        Log.i(TAG, "updateCurrentWeather: ${currentWeatherList.value!!.size}")
     }
 
     /**
@@ -86,6 +87,10 @@ class ResultViewModel @Inject constructor(
     val apiCurrentProgress: LiveData<Int> get() = _apiCurrentProgress
 
     fun getCurrentWeatherDataForEachCity() {
+        currentProgress = 0
+        _apiCurrentProgress.value = 0
+        _currentWeatherList.value!!.clear()
+
         viewModelScope.launch {
             runTimerMessage()
             for (city in cities) {
@@ -98,7 +103,6 @@ class ResultViewModel @Inject constructor(
     private fun incrementCurrentProgress(){
         currentProgress += 20
         _apiCurrentProgress.value = currentProgress
-        Log.i(TAG, "incrementCurrentProgress: ${apiCurrentProgress.value}")
     }
 
     /**
@@ -115,7 +119,6 @@ class ResultViewModel @Inject constructor(
             for (index in listMessageToDisplay) {
                 delay(6000)
                 _messageToDisplay.value = index
-                Log.i(TAG, "runTimerMessage: ${messageToDisplay.value}")
             }
         }
     }

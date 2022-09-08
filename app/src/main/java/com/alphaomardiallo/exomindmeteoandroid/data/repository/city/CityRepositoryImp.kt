@@ -10,11 +10,11 @@ class CityRepositoryImp @Inject constructor() : CityRepository {
      */
     override fun getCityList(): List<City> {
         return listOf(
-            City(1, "Rennes", 48.1173, 1.6778),
-            City(2, "Paris", 48.8566, 2.3522),
-            City(3, "Nantes", 47.2184, 1.5536),
-            City(4, "Bordeaux", 44.8378, 0.5792),
-            City(5, "Lyon", 45.7640, 4.8357)
+            City(1, "Rennes", 48.117318276455535, -1.6779352450051628),
+            City(2, "Paris", 48.856760710238454, 2.3525025839756037),
+            City(3, "Nantes", 47.21725, -1.55336),
+            City(4, "Bordeaux", 44.83875685087825, -0.5850012088851255),
+            City(5, "Lyon", 45.74846, 4.84671)
         )
     }
 }
