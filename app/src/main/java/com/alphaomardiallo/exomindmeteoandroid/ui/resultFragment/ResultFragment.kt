@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.alphaomardiallo.exomindmeteoandroid.R
 import com.alphaomardiallo.exomindmeteoandroid.databinding.FragmentResultBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -32,9 +33,19 @@ class ResultFragment : Fragment() {
         /**
          * testing that API call with delay works correctly before implementation
          */
+        setupRecyclerView()
         getCurrentWeatherData()
         observeData()
         restartOnClickSetup()
+    }
+
+    /**
+     * RecyclerView setup
+     */
+    private fun setupRecyclerView(){
+        binding.recyclerView.setHasFixedSize(true)
+        binding.recyclerView.layoutManager = (LinearLayoutManager(view?.context, LinearLayoutManager.VERTICAL, false))
+        binding.recyclerView.adapter =
     }
 
     /**
