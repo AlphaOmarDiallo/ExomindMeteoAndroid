@@ -23,5 +23,4 @@ class CurrentWeatherRepositoryImp @Inject constructor(
             lang = lang
         )
     }
-
 }

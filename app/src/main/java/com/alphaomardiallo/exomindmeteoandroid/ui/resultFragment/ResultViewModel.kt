@@ -68,7 +68,6 @@ class ResultViewModel @Inject constructor(
                     null
                 )
             }
-
             incrementCurrentProgress()
         }
     }
@@ -100,7 +99,7 @@ class ResultViewModel @Inject constructor(
         }
     }
 
-    private fun incrementCurrentProgress(){
+    private fun incrementCurrentProgress() {
         currentProgress += 20
         _apiCurrentProgress.value = currentProgress
     }
@@ -111,9 +110,9 @@ class ResultViewModel @Inject constructor(
 
     private val _messageToDisplay: MutableLiveData<Int> = MutableLiveData()
     val messageToDisplay: LiveData<Int> get() = _messageToDisplay
-    
+
     private fun runTimerMessage() {
-        val listMessageToDisplay = listOf(1,2,0,1,2,0,1,2,0)
+        val listMessageToDisplay = listOf(1, 2, 0, 1, 2, 0, 1, 2, 0)
         viewModelScope.launch {
             _messageToDisplay.value = 0
             for (index in listMessageToDisplay) {

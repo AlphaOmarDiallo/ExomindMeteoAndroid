@@ -16,6 +16,7 @@ class ResultFragment : Fragment() {
 
     private lateinit var binding: FragmentResultBinding
     private lateinit var viewModel: ResultViewModel
+    private val adapter: ResultAdapter = ResultAdapter(ResultAdapter.ListDiff())
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -25,7 +26,6 @@ class ResultFragment : Fragment() {
         binding = FragmentResultBinding.inflate(inflater, container, false)
         viewModel = ViewModelProvider(requireActivity())[ResultViewModel::class.java]
         return binding.root
-
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -34,18 +34,26 @@ class ResultFragment : Fragment() {
          * testing that API call with delay works correctly before implementation
          */
         setupRecyclerView()
-        getCurrentWeatherData()
         observeData()
+        if (viewModel.currentWeatherList.value!!.isEmpty()) {
+            getCurrentWeatherData()
+        }
         restartOnClickSetup()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        viewModel.currentWeatherList.removeObservers(requireActivity())
     }
 
     /**
      * RecyclerView setup
      */
-    private fun setupRecyclerView(){
+    private fun setupRecyclerView() {
         binding.recyclerView.setHasFixedSize(true)
-        binding.recyclerView.layoutManager = (LinearLayoutManager(view?.context, LinearLayoutManager.VERTICAL, false))
-        binding.recyclerView.adapter =
+        binding.recyclerView.layoutManager =
+            (LinearLayoutManager(view?.context, LinearLayoutManager.VERTICAL, false))
+        binding.recyclerView.adapter = adapter
     }
 
     /**
@@ -67,11 +75,15 @@ class ResultFragment : Fragment() {
      * Progress bar setup
      */
     private fun incrementProgress(progress: Int) {
-        binding.progressBar.progress = progress
-        if (progress == 100) {
-            hideProgressBar()
-            hideTextView()
-            buttonRestartVisible()
+        if (isAdded) {
+            binding.progressBar.progress = progress
+            if (progress == 100) {
+                hideProgressBar()
+                hideTextView()
+                buttonRestartVisible()
+
+                viewModel.currentWeatherList.observe(requireActivity(), adapter::submitList)
+            }
         }
     }
 
@@ -79,7 +91,7 @@ class ResultFragment : Fragment() {
         binding.progressBar.visibility = View.INVISIBLE
     }
 
-    private fun showProgressBarAndSetToZero(){
+    private fun showProgressBarAndSetToZero() {
         binding.progressBar.visibility = View.VISIBLE
         binding.progressBar.progress = 0
     }
@@ -99,7 +111,7 @@ class ResultFragment : Fragment() {
         binding.textView2.visibility = View.INVISIBLE
     }
 
-    private fun showTextView(){
+    private fun showTextView() {
         binding.textView2.visibility = View.VISIBLE
     }
 
@@ -111,7 +123,7 @@ class ResultFragment : Fragment() {
         binding.button.visibility = View.VISIBLE
     }
 
-    private fun buttonRestartInvisible(){
+    private fun buttonRestartInvisible() {
         binding.button.visibility = View.GONE
     }
 
@@ -127,4 +139,5 @@ class ResultFragment : Fragment() {
         showProgressBarAndSetToZero()
         getCurrentWeatherData()
     }
+
 }
