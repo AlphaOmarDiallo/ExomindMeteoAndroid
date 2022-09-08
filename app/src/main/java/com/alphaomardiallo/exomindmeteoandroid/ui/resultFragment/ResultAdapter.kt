@@ -1,5 +1,7 @@
 package com.alphaomardiallo.exomindmeteoandroid.ui.resultFragment
 
+import android.content.ContentValues.TAG
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -62,10 +64,12 @@ class ResultAdapter(
         }
 
         fun bind(responseCurrentWeather: ResponseCurrentWeather) {
-            icon.load("http://openweathermap.org/img/w/${responseCurrentWeather.weather[0]}.png")
+            val data = "https://openweathermap.org/img/wn/${responseCurrentWeather.weather[0].icon}@2x.png"
+            Log.e(TAG, "bind: $data", null)
+            icon.load(data)
             city.text = responseCurrentWeather.name
-            val temp = responseCurrentWeather.main.temp.toInt()
-            currentTemp.text = temp.toString()
+            currentTemp.text = String.format("${responseCurrentWeather.main.temp.toInt()}°C")
+            otherInfo.text = responseCurrentWeather.weather[0].description
         }
     }
 

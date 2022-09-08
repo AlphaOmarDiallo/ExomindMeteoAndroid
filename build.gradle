@@ -14,6 +14,7 @@ buildscript {
         mockwebserver_version = '4.10.0'
         easypermission_version = '1.0.0'
         coil_version = '2.1.0'
+        glide_version = '4.13.2'
     }
 
     repositories {
