@@ -20,6 +20,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import com.alphaomardiallo.exomindmeteoandroid.R
+import com.alphaomardiallo.exomindmeteoandroid.ui.theme.ExomindMeteoTheme
 
 
 class StartFragment : Fragment() {
@@ -32,8 +33,10 @@ class StartFragment : Fragment() {
     ): View {
         return ComposeView(requireContext()).apply {
             setContent {
-                navController = findNavController()
-                NavigateToResultFragment()
+                ExomindMeteoTheme {
+                    navController = findNavController()
+                    NavigateToResultFragment()
+                }
             }
         }
     }

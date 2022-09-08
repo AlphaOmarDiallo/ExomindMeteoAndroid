@@ -1,7 +1,5 @@
 package com.alphaomardiallo.exomindmeteoandroid.ui.resultFragment
 
-import android.content.ContentValues.TAG
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -51,10 +49,10 @@ class ResultAdapter(
     }
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        var icon: ImageView
-        var city: TextView
-        var otherInfo: TextView
-        var currentTemp: TextView
+        private var icon: ImageView
+        private var city: TextView
+        private var otherInfo: TextView
+        private var currentTemp: TextView
 
         init {
             icon = itemView.findViewById(R.id.ivIcon)
@@ -64,8 +62,8 @@ class ResultAdapter(
         }
 
         fun bind(responseCurrentWeather: ResponseCurrentWeather) {
-            val data = "https://openweathermap.org/img/wn/${responseCurrentWeather.weather[0].icon}@2x.png"
-            Log.e(TAG, "bind: $data", null)
+            val data =
+                "https://openweathermap.org/img/wn/${responseCurrentWeather.weather[0].icon}@2x.png"
             icon.load(data)
             city.text = responseCurrentWeather.name
             currentTemp.text = String.format("${responseCurrentWeather.main.temp.toInt()}°C")
